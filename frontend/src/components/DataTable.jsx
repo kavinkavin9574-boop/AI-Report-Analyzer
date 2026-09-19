@@ -4,37 +4,37 @@ export default function DataTable({ fields }) {
   }
 
   return (
-    <div className="overflow-x-auto rounded-lg border bg-white">
+    <div className="overflow-x-auto rounded-xl border border-white/10 bg-white/5">
       <table className="min-w-full text-sm">
-        <thead className="bg-slate-100 text-left text-slate-600">
+        <thead className="sticky top-0 bg-[#12121c] text-left text-slate-400">
           <tr>
-            <th className="px-3 py-2">Parameter</th>
-            <th className="px-3 py-2">Value</th>
-            <th className="px-3 py-2">Unit</th>
-            <th className="px-3 py-2">Reference Range</th>
-            <th className="px-3 py-2">Page</th>
-            <th className="px-3 py-2">Confidence</th>
-            <th className="px-3 py-2">Status</th>
+            <th className="px-3 py-2.5 font-medium">Parameter</th>
+            <th className="px-3 py-2.5 font-medium">Value</th>
+            <th className="px-3 py-2.5 font-medium">Unit</th>
+            <th className="px-3 py-2.5 font-medium">Reference Range</th>
+            <th className="px-3 py-2.5 font-medium">Page</th>
+            <th className="px-3 py-2.5 font-medium">Confidence</th>
+            <th className="px-3 py-2.5 font-medium">Status</th>
           </tr>
         </thead>
         <tbody>
-          {fields.map((f) => (
-            <tr key={f.id} className="border-t">
-              <td className="px-3 py-2 font-medium">{f.parameter}</td>
-              <td className="px-3 py-2">{f.value ?? f.raw_value}</td>
-              <td className="px-3 py-2">{f.unit || "—"}</td>
-              <td className="px-3 py-2">
+          {fields.map((f, i) => (
+            <tr key={f.id} className={`border-t border-white/5 ${i % 2 ? "bg-white/[0.03]" : ""}`}>
+              <td className="px-3 py-2 font-medium text-slate-100">{f.parameter}</td>
+              <td className="px-3 py-2 text-slate-300">{f.value ?? f.raw_value}</td>
+              <td className="px-3 py-2 text-slate-300">{f.unit || "—"}</td>
+              <td className="px-3 py-2 text-slate-300">
                 {f.reference_min != null && f.reference_max != null
                   ? `${f.reference_min}–${f.reference_max}`
                   : "—"}
               </td>
-              <td className="px-3 py-2">{f.page_number}</td>
-              <td className="px-3 py-2">{Math.round((f.confidence ?? 0) * 100)}%</td>
+              <td className="px-3 py-2 text-slate-300">{f.page_number}</td>
+              <td className="px-3 py-2 text-slate-300">{Math.round((f.confidence ?? 0) * 100)}%</td>
               <td className="px-3 py-2">
                 {f.is_outside_range ? (
-                  <span className="text-red-600 font-medium">Outside range</span>
+                  <span className="text-rose-400 font-medium">Outside range</span>
                 ) : (
-                  <span className="text-emerald-600">Normal</span>
+                  <span className="text-emerald-400">Normal</span>
                 )}
               </td>
             </tr>

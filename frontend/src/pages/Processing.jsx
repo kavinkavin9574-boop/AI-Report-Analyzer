@@ -37,29 +37,29 @@ export default function Processing() {
   const currentIndex = STAGES.indexOf(status);
 
   return (
-    <div className="max-w-md mx-auto text-center py-12">
-      <h1 className="text-lg font-semibold mb-6">Processing your report</h1>
-      <div className="space-y-3 text-left">
+    <div className="max-w-md mx-auto py-12">
+      <h1 className="text-lg font-semibold mb-8 text-center tracking-tight">Processing your report</h1>
+      <div className="panel p-6 space-y-4">
         {STAGES.map((stage, i) => (
           <div key={stage} className="flex items-center gap-3">
             <span
-              className={`w-5 h-5 rounded-full flex items-center justify-center text-xs ${
+              className={`w-6 h-6 rounded-full flex items-center justify-center text-[11px] font-medium ${
                 i < currentIndex
                   ? "bg-emerald-500 text-white"
                   : i === currentIndex
-                  ? "bg-brand-500 text-white animate-pulse"
-                  : "bg-slate-200 text-slate-400"
+                    ? "bg-brand-500 text-white shadow-glow animate-pulse"
+                    : "bg-white/10 text-slate-500"
               }`}
             >
               {i < currentIndex ? "✓" : i + 1}
             </span>
-            <span className={i <= currentIndex ? "text-slate-800" : "text-slate-400"}>
+            <span className={i <= currentIndex ? "text-slate-100 capitalize" : "text-slate-500 capitalize"}>
               {stage.replace("_", " ")}
             </span>
           </div>
         ))}
       </div>
-      {error && <p className="text-sm text-red-600 mt-6">{error}</p>}
+      {error && <p className="text-sm text-rose-400 mt-6 text-center">{error}</p>}
     </div>
   );
 }

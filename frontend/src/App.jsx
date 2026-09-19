@@ -14,17 +14,24 @@ const navItems = [
 export default function App() {
   return (
     <div className="min-h-screen flex flex-col">
-      <header className="border-b bg-white">
-        <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-          <div className="font-semibold text-lg text-brand-700">AI Report Analyzer</div>
-          <nav className="flex gap-4 text-sm">
+      <header className="sticky top-0 z-20 border-b border-white/10 bg-canvas/80 backdrop-blur-xl">
+        <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+          <div className="flex items-center gap-2.5">
+            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-600 text-xs font-bold text-white shadow-glow">
+              AR
+            </span>
+            <div className="font-semibold text-[15px] tracking-tight text-slate-100">AI Report Analyzer</div>
+          </div>
+          <nav className="flex gap-1 text-sm">
             {navItems.map((item) => (
               <NavLink
                 key={item.to}
                 to={item.to}
                 end={item.end}
                 className={({ isActive }) =>
-                  isActive ? "text-brand-600 font-medium" : "text-slate-500 hover:text-slate-800"
+                  isActive
+                    ? "rounded-full bg-white/10 px-3 py-1.5 font-medium text-white"
+                    : "rounded-full px-3 py-1.5 text-slate-400 hover:bg-white/5 hover:text-slate-200"
                 }
               >
                 {item.label}
@@ -34,7 +41,7 @@ export default function App() {
         </div>
       </header>
 
-      <main className="flex-1 max-w-6xl mx-auto w-full px-4 py-6">
+      <main className="flex-1 max-w-7xl mx-auto w-full px-4 py-8">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/processing/:id" element={<Processing />} />
@@ -45,7 +52,7 @@ export default function App() {
         </Routes>
       </main>
 
-      <footer className="border-t bg-white text-center text-xs text-slate-400 py-3">
+      <footer className="border-t border-white/10 text-center text-xs text-slate-500 py-4">
         AI Report Analyzer — for informational purposes only, not medical advice.
       </footer>
     </div>

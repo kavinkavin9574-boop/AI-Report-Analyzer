@@ -11,7 +11,7 @@ export default function ModelSelector({ models, selected, onChange, className = 
       value={selected}
       onChange={(e) => onChange(e.target.value)}
       title="AI model"
-      className={`border rounded-lg px-2 py-1.5 text-xs bg-white text-slate-600 max-w-[220px] truncate ${className}`}
+      className={`input-dark max-w-[220px] truncate py-1.5 text-xs text-slate-300 ${className}`}
     >
       {models.map((m) => (
         <option key={m.id} value={m.id}>

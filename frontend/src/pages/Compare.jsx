@@ -40,48 +40,44 @@ export default function Compare() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-xl font-semibold mb-1">Compare reports</h1>
-        <p className="text-slate-500 text-sm">Select two or more completed reports to see trends across dates.</p>
+        <h1 className="text-xl font-semibold tracking-tight mb-1">Compare reports</h1>
+        <p className="text-slate-400 text-sm">Select two or more completed reports to see trends across dates.</p>
       </div>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-2">
         {reports.map((r) => (
           <label
             key={r.id}
-            className={`flex items-center gap-2 border rounded-lg p-3 bg-white cursor-pointer ${
-              selected.includes(r.id) ? "border-brand-500 ring-1 ring-brand-200" : ""
+            className={`flex items-center gap-2 panel p-3 cursor-pointer transition ${
+              selected.includes(r.id) ? "border-brand-500 ring-1 ring-brand-500/40 bg-brand-500/10" : "hover:border-white/20"
             }`}
           >
             <input type="checkbox" checked={selected.includes(r.id)} onChange={() => toggle(r.id)} />
-            <div className="text-sm">
-              <div className="font-medium truncate">{r.filename}</div>
-              <div className="text-xs text-slate-400">{new Date(r.upload_date).toLocaleDateString()}</div>
+            <div className="text-sm min-w-0">
+              <div className="font-medium truncate text-slate-100">{r.filename}</div>
+              <div className="text-xs text-slate-500">{new Date(r.upload_date).toLocaleDateString()}</div>
             </div>
           </label>
         ))}
       </div>
 
-      <div className="flex items-center gap-2">
-        <button
-          onClick={runCompare}
-          disabled={loading}
-          className="px-4 py-2 bg-brand-600 text-white rounded hover:bg-brand-700 disabled:opacity-50 text-sm"
-        >
+      <div className="flex flex-wrap items-center gap-2">
+        <button onClick={runCompare} disabled={loading} className="btn-primary">
           {loading ? "Comparing…" : "Compare selected"}
         </button>
         <ModelSelector models={models} selected={selectedModel} onChange={selectModel} />
       </div>
 
-      {error && <p className="text-sm text-red-600">{error}</p>}
+      {error && <p className="text-sm text-rose-400">{error}</p>}
 
       {result && (
         <div className="space-y-4">
           {result.ai_comparison && (
-            <div className="bg-white rounded-lg border p-4 text-sm">
-              <h3 className="font-medium mb-1">AI Comparison Summary</h3>
-              <p>{result.ai_comparison}</p>
+            <div className="panel p-4 text-sm">
+              <h3 className="font-medium mb-1 text-slate-200">AI Comparison Summary</h3>
+              <p className="text-slate-300 leading-relaxed">{result.ai_comparison}</p>
               {result.model_used && (
-                <p className="text-xs text-slate-400 mt-2">Generated with {result.model_used}</p>
+                <p className="text-xs text-slate-500 mt-2">Generated with {result.model_used}</p>
               )}
             </div>
           )}

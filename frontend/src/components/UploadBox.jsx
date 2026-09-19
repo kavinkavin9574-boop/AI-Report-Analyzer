@@ -38,8 +38,10 @@ export default function UploadBox({ onFileSelected, uploading, progress }) {
           validateAndSelect(e.dataTransfer.files?.[0]);
         }}
         onClick={() => inputRef.current?.click()}
-        className={`border-2 border-dashed rounded-xl p-10 text-center cursor-pointer transition-colors ${
-          dragOver ? "border-brand-500 bg-brand-50" : "border-slate-300 bg-white hover:border-brand-400"
+        className={`border-2 border-dashed rounded-2xl p-10 text-center cursor-pointer transition ${
+          dragOver
+            ? "border-brand-400 bg-brand-500/10 shadow-glow"
+            : "border-white/15 bg-white/[0.03] hover:border-brand-400/50"
         }`}
       >
         <input
@@ -49,22 +51,22 @@ export default function UploadBox({ onFileSelected, uploading, progress }) {
           className="hidden"
           onChange={(e) => validateAndSelect(e.target.files?.[0])}
         />
-        <p className="text-slate-600">
-          Drag and drop a report here, or <span className="text-brand-600 font-medium">browse</span>
+        <p className="text-slate-300">
+          Drag and drop a report here, or <span className="text-brand-400 font-medium">browse</span>
         </p>
-        <p className="text-xs text-slate-400 mt-2">PDF, JPG, or PNG — up to 20MB</p>
+        <p className="text-xs text-slate-500 mt-2">PDF, JPG, or PNG — up to 20MB</p>
       </div>
 
       {uploading && (
         <div className="mt-3">
-          <div className="h-2 w-full bg-slate-200 rounded overflow-hidden">
-            <div className="h-2 bg-brand-500 transition-all" style={{ width: `${progress}%` }} />
+          <div className="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
+            <div className="h-1.5 bg-brand-500 transition-all" style={{ width: `${progress}%` }} />
           </div>
           <p className="text-xs text-slate-500 mt-1">Uploading… {progress}%</p>
         </div>
       )}
 
-      {error && <p className="text-sm text-red-600 mt-2">{error}</p>}
+      {error && <p className="text-sm text-rose-400 mt-2">{error}</p>}
     </div>
   );
 }
